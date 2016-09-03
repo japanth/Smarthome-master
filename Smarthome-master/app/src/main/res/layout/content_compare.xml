@@ -11,5 +11,11 @@
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="com.smart.smarthome.CompareActivity"
     tools:showIn="@layout/app_bar_compare">
-
+    <ListView
+        android:id="@+id/listViewProductCompare"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:layout_margin="20dp" />
 </RelativeLayout>

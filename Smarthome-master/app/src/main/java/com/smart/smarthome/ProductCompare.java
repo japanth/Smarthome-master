@@ -8,8 +8,9 @@ public class ProductCompare {
     Double price;
     int volume;
     int unit;
+    String barcode;
 
-    public ProductCompare(String name, Double price, int volume, int unit) {
+    public ProductCompare(String name, Double price, int volume, int unit, String barcode) {
         this.name = name;
         this.price = price;
         this.volume = volume;
@@ -46,5 +47,13 @@ public class ProductCompare {
 
     public void setUnit(int unit) {
         this.unit = unit;
+    }
+
+    public String getBarcode() {
+        return barcode;
+    }
+
+    public void setUnit(String barcode) {
+        this.barcode = barcode;
     }
 }

@@ -14,4 +14,12 @@ public class ProductCompareData {
     public static void remove(int index){
         compareProductCompareData.remove(index);
     }
+
+    public static ProductCompare get(int index){
+        return compareProductCompareData.get(index);
+    }
+
+    public static ArrayList<ProductCompare> getAll(){
+        return compareProductCompareData;
+    }
 }

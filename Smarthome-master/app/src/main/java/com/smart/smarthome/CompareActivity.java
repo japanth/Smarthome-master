@@ -12,6 +12,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 public class CompareActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -30,6 +33,12 @@ public class CompareActivity extends AppCompatActivity
                 finish();
             }
         });
+
+        ListView listViewProductCompare = (ListView)findViewById(R.id.listViewProductCompare);
+
+        ProductCompareDataAdapter productCompareDataAdapter = new ProductCompareDataAdapter(this, ProductCompareData.getAll());
+
+        listViewProductCompare.setAdapter(productCompareDataAdapter);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

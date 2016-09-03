@@ -51,6 +51,12 @@ public class InputActivity extends AppCompatActivity
         btnAddCompare.setOnClickListener(new View.OnClickListener()
         {
             public void onClick(View v){
+                String productName = inputProduct.getText().toString();
+                Double productPrice = Double.parseDouble(inputPrice.getText().toString());
+                int productVolume = Integer.parseInt(inputVolume.getText().toString());
+                int productUnit = Integer.parseInt(inputUnits.getText().toString());
+
+                ProductCompareData.add(new ProductCompare(productName, productPrice, productVolume, productUnit, null));
                 Intent input = new Intent(InputActivity.this,CompareActivity.class);
                 startActivity(input);
             }
