@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
-import android.support.design.widget.TextInputLayout;
-import android.text.Editable;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,55 +14,27 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
-import android.widget.EditText;
 
-public class InputActivity extends AppCompatActivity
+public class ManualCompareActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    private Toolbar toolbar;
-    private EditText inputProduct, inputPrice, inputVolume, inputUnits;
-    private TextInputLayout inputLayoutProduct, inputLayoutPrice, inputLayoutVolume, inputLayoutUnits;
-    private Button btnAddCompare;
-
+    Button Cancel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_input);
+        setContentView(R.layout.activity_manual_compare);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        inputLayoutProduct = (TextInputLayout) findViewById(R.id.input_layout_product_name);
-        inputLayoutPrice = (TextInputLayout) findViewById(R.id.input_layout_product_price);
-        inputLayoutVolume = (TextInputLayout) findViewById(R.id.input_layout_product_volume);
-        inputLayoutUnits = (TextInputLayout) findViewById(R.id.input_layout_product_units);
-        inputProduct = (EditText) findViewById(R.id.input_product);
-        inputPrice = (EditText) findViewById(R.id.input_price);
-        inputVolume = (EditText) findViewById(R.id.input_volume);
-        inputUnits = (EditText) findViewById(R.id.input_units);
-        btnAddCompare = (Button) findViewById(R.id.btn_addCompare);
-
-
-        btnAddCompare.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View v){
-                String productName = inputProduct.getText().toString();
-                Double productPrice = Double.parseDouble(inputPrice.getText().toString());
-                int productVolume = Integer.parseInt(inputVolume.getText().toString());
-                int productUnit = Integer.parseInt(inputUnits.getText().toString());
-
-                ProductCompareData.add(new ProductCompare(productName, productPrice, productVolume, productUnit, null));
-                Intent input = new Intent(InputActivity.this,CompareActivity.class);
-                startActivity(input);
+        Cancel = (Button)findViewById(R.id.CancelCompare);
+        Cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent bar = new Intent(ManualCompareActivity.this,CalculatorActivity.class);
+                startActivity(bar);
             }
         });
-
-
-
-
 
         /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
@@ -98,7 +68,7 @@ public class InputActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.input, menu);
+        getMenuInflater().inflate(R.menu.manual_compare, menu);
         return true;
     }
 
@@ -110,9 +80,9 @@ public class InputActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+       /* if (id == R.id.action_settings) {
             return true;
-        }
+        }*/
 
         return super.onOptionsItemSelected(item);
     }
@@ -123,18 +93,25 @@ public class InputActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_inventory) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+            Intent bar = new Intent(ManualCompareActivity.this,InventoryActivity.class);
+            startActivity(bar);
+        } else if (id == R.id.nav_shoppinglist) {
+            Intent bar = new Intent(ManualCompareActivity.this,ShoppinglistActivity.class);
+            startActivity(bar);
+        } else if (id == R.id.nav_calculator) {
+            Intent bar = new Intent(ManualCompareActivity.this,CalculatorActivity.class);
+            startActivity(bar);
+        } else if (id == R.id.nav_locationbase) {
+            Intent bar = new Intent(ManualCompareActivity.this,LocationbaseActivity.class);
+            startActivity(bar);
+        } else if (id == R.id.nav_summary) {
+            Intent bar = new Intent(ManualCompareActivity.this,SummaryreportActivity.class);
+            startActivity(bar);
+        } else if (id == R.id.nav_setting) {
+            Intent bar = new Intent(ManualCompareActivity.this,SettingActivity.class);
+            startActivity(bar);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

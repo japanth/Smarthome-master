@@ -13,33 +13,47 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ListView;
+import android.widget.Button;
 
-import java.util.ArrayList;
-
-public class CompareActivity extends AppCompatActivity
+public class CalculatorActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+    Button ManualCompare;
+    Button ScanBarcode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_compare);
+        setContentView(R.layout.activity_calculator);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.addMoreCompare);
-        fab.setOnClickListener(new View.OnClickListener() {
+        ManualCompare = (Button)findViewById(R.id.manaulCompare);
+        ScanBarcode = (Button)findViewById(R.id.scanbarcodeCompare);
+
+        ManualCompare.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                Intent bar = new Intent(CalculatorActivity.this,ManualCompareActivity.class);
+                startActivity(bar);
             }
         });
 
-        ListView listViewProductCompare = (ListView)findViewById(R.id.listViewProductCompare);
+        ScanBarcode.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent bar = new Intent(CalculatorActivity.this,BarcodeActivity.class);
+                startActivity(bar);
+            }
+        });
 
-        ProductCompareDataAdapter productCompareDataAdapter = new ProductCompareDataAdapter(this, ProductCompareData.getAll());
-
-        listViewProductCompare.setAdapter(productCompareDataAdapter);
+        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -64,7 +78,7 @@ public class CompareActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.compare, menu);
+        getMenuInflater().inflate(R.menu.calculator, menu);
         return true;
     }
 
@@ -76,7 +90,7 @@ public class CompareActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-       /* if (id == R.id.action_settings) {
+        /*if (id == R.id.action_settings) {
             return true;
         }*/
 
@@ -91,22 +105,22 @@ public class CompareActivity extends AppCompatActivity
 
         if (id == R.id.nav_inventory) {
             // Handle the camera action
-            Intent bar = new Intent(CompareActivity.this,InventoryActivity.class);
+            Intent bar = new Intent(CalculatorActivity.this,InventoryActivity.class);
             startActivity(bar);
         } else if (id == R.id.nav_shoppinglist) {
-            Intent bar = new Intent(CompareActivity.this,ShoppinglistActivity.class);
+            Intent bar = new Intent(CalculatorActivity.this,ShoppinglistActivity.class);
             startActivity(bar);
         } else if (id == R.id.nav_calculator) {
-            Intent bar = new Intent(CompareActivity.this,CalculatorActivity.class);
+            Intent bar = new Intent(CalculatorActivity.this,CalculatorActivity.class);
             startActivity(bar);
         } else if (id == R.id.nav_locationbase) {
-            Intent bar = new Intent(CompareActivity.this,LocationbaseActivity.class);
+            Intent bar = new Intent(CalculatorActivity.this,LocationbaseActivity.class);
             startActivity(bar);
         } else if (id == R.id.nav_summary) {
-            Intent bar = new Intent(CompareActivity.this,SummaryreportActivity.class);
+            Intent bar = new Intent(CalculatorActivity.this,SummaryreportActivity.class);
             startActivity(bar);
         } else if (id == R.id.nav_setting) {
-            Intent bar = new Intent(CompareActivity.this,SettingActivity.class);
+            Intent bar = new Intent(CalculatorActivity.this,SettingActivity.class);
             startActivity(bar);
         }
 

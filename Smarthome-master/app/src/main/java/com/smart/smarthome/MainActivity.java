@@ -28,25 +28,7 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-         inputbtn = (ImageView) findViewById(R.id.image_input_btn);
 
-        inputbtn.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View v){
-                Intent input = new Intent(MainActivity.this,InputActivity.class);
-                startActivity(input);
-            }
-        });
-
-        barcodebtn = (ImageView) findViewById(R.id.image_barcode_btn);
-
-        barcodebtn.setOnClickListener(new View.OnClickListener()
-        {
-            public void onClick(View v){
-                Intent bar = new Intent(MainActivity.this,BarcodeActivity.class);
-                startActivity(bar);
-            }
-        });
 
 
 
@@ -94,9 +76,9 @@ public class MainActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        /*if (id == R.id.action_settings) {
             return true;
-        }
+        }*/
 
         return super.onOptionsItemSelected(item);
     }
@@ -107,20 +89,25 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_inventory) {
             // Handle the camera action
-            Intent bar = new Intent(MainActivity.this,BarcodeActivity.class);
+            Intent bar = new Intent(MainActivity.this,InventoryActivity.class);
             startActivity(bar);
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+        } else if (id == R.id.nav_shoppinglist) {
+            Intent bar = new Intent(MainActivity.this,ShoppinglistActivity.class);
+            startActivity(bar);
+        } else if (id == R.id.nav_calculator) {
+            Intent bar = new Intent(MainActivity.this,CalculatorActivity.class);
+            startActivity(bar);
+        } else if (id == R.id.nav_locationbase) {
+            Intent bar = new Intent(MainActivity.this,LocationbaseActivity.class);
+            startActivity(bar);
+        } else if (id == R.id.nav_summary) {
+            Intent bar = new Intent(MainActivity.this,SummaryreportActivity.class);
+            startActivity(bar);
+        } else if (id == R.id.nav_setting) {
+            Intent bar = new Intent(MainActivity.this,SettingActivity.class);
+            startActivity(bar);
         }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);

@@ -2,7 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.smart.smarthome">
+
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -24,18 +26,41 @@
             android:label="@string/title_activity_barcode"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".InputActivity"
-            android:label="@string/title_activity_input"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
             android:name=".CompareActivity"
             android:label="@string/title_activity_compare"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
-
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name="com.journeyapps.barcodescanner.CaptureActivity"
             android:screenOrientation="fullSensor"
             tools:replace="screenOrientation" />
+        <activity
+            android:name=".InventoryActivity"
+            android:label="@string/title_activity_inventory"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ShoppinglistActivity"
+            android:label="@string/title_activity_shoppinglist"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CalculatorActivity"
+            android:label="@string/title_activity_calculator"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".LocationbaseActivity"
+            android:label="@string/title_activity_locationbase"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SummaryreportActivity"
+            android:label="@string/title_activity_summaryreport"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SettingActivity"
+            android:label="@string/title_activity_setting"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".ManualCompareActivity"
+            android:label="@string/title_activity_manual_compare"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>

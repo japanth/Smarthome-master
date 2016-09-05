@@ -111,9 +111,9 @@ public class BarcodeActivity extends AppCompatActivity
         int id = item.getItemId();
 
         //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+      /*  if (id == R.id.action_settings) {
             return true;
-        }
+        }*/
 
         return super.onOptionsItemSelected(item);
     }
@@ -124,19 +124,27 @@ public class BarcodeActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
+        if (id == R.id.nav_inventory) {
             // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
+            Intent bar = new Intent(BarcodeActivity.this,InventoryActivity.class);
+            startActivity(bar);
+        } else if (id == R.id.nav_shoppinglist) {
+            Intent bar = new Intent(BarcodeActivity.this,ShoppinglistActivity.class);
+            startActivity(bar);
+        } else if (id == R.id.nav_calculator) {
+            Intent bar = new Intent(BarcodeActivity.this,CalculatorActivity.class);
+            startActivity(bar);
+        } else if (id == R.id.nav_locationbase) {
+            Intent bar = new Intent(BarcodeActivity.this,LocationbaseActivity.class);
+            startActivity(bar);
+        } else if (id == R.id.nav_summary) {
+            Intent bar = new Intent(BarcodeActivity.this,SummaryreportActivity.class);
+            startActivity(bar);
+        } else if (id == R.id.nav_setting) {
+            Intent bar = new Intent(BarcodeActivity.this,SettingActivity.class);
+            startActivity(bar);
         }
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
@@ -148,13 +156,17 @@ public class BarcodeActivity extends AppCompatActivity
         final IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if(result != null) {
             if(result.getContents() == null) {
-                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
+                finish();
             } else {
                 Log.i("BARCODE", result.getContents());
                 Query queryRef = ref.orderByChild("Barcode").equalTo(Long.valueOf(result.getContents()));
                 queryRef.addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+                        if(dataSnapshot.getChildrenCount()==0){
+                            Toast.makeText(getApplicationContext(), "No firebase", Toast.LENGTH_SHORT).show();
+
+                        }
                         Log.i("TEST", "IN");
                         for (DataSnapshot child : dataSnapshot.getChildren()) {
                             productCompare = new ProductCompare(child.child("Products").getValue().toString(),

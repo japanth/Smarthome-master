@@ -13,5 +13,12 @@
     <string name="product_units">Units</string>
     <string name="add_comparelist">Add to Compare Lisst</string>
     <string name="title_activity_compare">CompareActivity</string>
+    <string name="title_activity_inventory">InventoryActivity</string>
+    <string name="title_activity_shoppinglist">ShoppinglistActivity</string>
+    <string name="title_activity_calculator">CalculatorActivity</string>
+    <string name="title_activity_locationbase">LocationbaseActivity</string>
+    <string name="title_activity_summaryreport">SummaryreportActivity</string>
+    <string name="title_activity_setting">SettingActivity</string>
+    <string name="title_activity_manual_compare">ManualCompareActivity</string>
 
 </resources>
