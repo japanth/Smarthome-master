@@ -43,4 +43,18 @@ dependencies {
 
     compile 'com.github.PhilJay:MPAndroidChart:v2.2.4'
 }
-apply plugin: 'com.google.gms.google-services'
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

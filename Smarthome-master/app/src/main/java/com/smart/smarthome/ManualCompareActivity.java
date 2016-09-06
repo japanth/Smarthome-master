@@ -14,11 +14,20 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.EditText;
 
 public class ManualCompareActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
     Button Cancel;
+    EditText nameProductCompare;
+    EditText pricecomparemanual;
+    EditText volumecomparemanual;
+    EditText unitcomparemanual;
+    Button AddCompare;
+    String nameproduct;
+    Double pricecompare;
+    Integer volumecompare,unitcompare;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +42,37 @@ public class ManualCompareActivity extends AppCompatActivity
             public void onClick(View view) {
                 Intent bar = new Intent(ManualCompareActivity.this,CalculatorActivity.class);
                 startActivity(bar);
+            }
+        });
+
+        nameProductCompare = (EditText) findViewById(R.id.nameProductCompare);
+        pricecomparemanual = (EditText) findViewById(R.id.pricecomparemanual);
+        volumecomparemanual = (EditText) findViewById(R.id.volumecomparemanual);
+        unitcomparemanual = (EditText) findViewById(R.id.unitcomparemanual);
+        AddCompare = (Button) findViewById(R.id.AddCompare);
+
+
+
+
+
+
+
+        AddCompare.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+
+                nameproduct = nameProductCompare.getText().toString();
+                pricecompare = Double.parseDouble(pricecomparemanual.getText().toString());
+                volumecompare = Integer.parseInt(volumecomparemanual.getText().toString());
+                unitcompare = Integer.parseInt(unitcomparemanual.getText().toString());
+
+                Intent i = new Intent(getApplicationContext(), CalculatorActivity.class);
+
+                i.putExtra("nameproduct",nameproduct);
+                i.putExtra("pricecompare",pricecompare);
+                i.putExtra("volumecompare",volumecompare);
+                i.putExtra("unitcompare",unitcompare);
+                startActivity(i);
             }
         });
 

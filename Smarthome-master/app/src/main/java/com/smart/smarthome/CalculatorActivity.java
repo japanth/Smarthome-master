@@ -14,11 +14,16 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 public class CalculatorActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     Button ManualCompare;
     Button ScanBarcode;
+  TextView nameproduct,pricecompare,volumecompare,unitcompare;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +50,33 @@ public class CalculatorActivity extends AppCompatActivity
                 startActivity(bar);
             }
         });
+
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            String nameproducts = extras.getString("nameproduct");
+            Double pricecompares = extras.getDouble("pricecompare");
+            Integer volumecompares = extras.getInt("volumecompare");
+            Integer unitcompares = extras.getInt("unitcompare");
+
+
+            ProductCompare pp = new ProductCompare(nameproducts,pricecompares,volumecompares,unitcompares,null);
+
+            ProductCompareData.add(pp);
+            ListView showinfor = (ListView) findViewById(R.id.listViewProductCompares);
+            ProductCompareDataAdapter productCompareDataAdapter = new ProductCompareDataAdapter(this, ProductCompareData.getAll());
+            showinfor.setAdapter(productCompareDataAdapter);
+
+
+        }
+
+
+
+
+
+
+
+
 
         /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
