@@ -3,7 +3,9 @@ package com.smart.smarthome;
 import android.annotation.TargetApi;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.app.TimePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.icu.util.Calendar;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -18,32 +20,63 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.wdullaer.materialdatetimepicker.time.RadialPickerLayout;
+
 public class SummaryreportActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener  {
+        implements NavigationView.OnNavigationItemSelectedListener, com.wdullaer.materialdatetimepicker.date.DatePickerDialog.OnDateSetListener {
+
+
+   TextView timeTextView;
+   TextView dateTextView;
+    ImageView monthly;
+
 
 
     @TargetApi(24)
     @Override
+
+
+
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_summaryreport);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        dateTextView = (TextView)findViewById(R.id.date_textview);
+        ImageView dateButton = (ImageView)findViewById(R.id.date_button);
 
-       /* FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
+        dateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                java.util.Calendar now = java.util.Calendar.getInstance();
+                com.wdullaer.materialdatetimepicker.date.DatePickerDialog dpd = com.wdullaer.materialdatetimepicker.date.DatePickerDialog.newInstance(
+                        SummaryreportActivity.this,
+                        now.get(java.util.Calendar.YEAR),
+                        now.get(java.util.Calendar.MONTH),
+                        now.get(java.util.Calendar.DAY_OF_MONTH)
+                );
+
+                dpd.setAccentColor(Color.parseColor("#9C27B0"));
+                dpd.setTitle("DatePicker Title");
+
+
+                dpd.show(getFragmentManager(), "Datepickerdialog");
+            }
+        });
+
+         monthly = (ImageView) findViewById(R.id.report_month);
+        monthly.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+                Intent tt = new Intent (SummaryreportActivity.this,MonthlyReportActivity.class);
+                startActivity(tt);
             }
-        });*/
-
-
+        });
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -56,6 +89,9 @@ public class SummaryreportActivity extends AppCompatActivity
     }
 
 
+
+
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -65,7 +101,23 @@ public class SummaryreportActivity extends AppCompatActivity
             super.onBackPressed();
         }
     }
+    public void onTimeSet(RadialPickerLayout view, int hourOfDay, int minute, int second) {
+        String hourString = hourOfDay < 10 ? "0"+hourOfDay : ""+hourOfDay;
+        String minuteString = minute < 10 ? "0"+minute : ""+minute;
+        String secondString = second < 10 ? "0"+second : ""+second;
+        String time = "You picked the following time: "+hourString+"h"+minuteString+"m"+secondString+"s";
+        timeTextView.setText(time);
+    }
 
+
+    public void onDateSet(com.wdullaer.materialdatetimepicker.date.DatePickerDialog view, int year, int monthOfYear, int dayOfMonth) {
+        String date = ""+dayOfMonth+"/"+(++monthOfYear)+"/"+year;
+        dateTextView.setText(date);
+    }
+
+    public void onClick(View view) {
+
+    }
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.

@@ -1,9 +1,11 @@
 package com.smart.smarthome;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,12 +15,16 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Button;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 public class CompareActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,19 +33,39 @@ public class CompareActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.addMoreCompare);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                finish();
+                Intent qq = new Intent(CompareActivity.this,CalculatorActivity.class);
+                startActivity(qq);
             }
         });
 
         ListView listViewProductCompare = (ListView)findViewById(R.id.listViewProductCompare);
-
         ProductCompareDataAdapter productCompareDataAdapter = new ProductCompareDataAdapter(this, ProductCompareData.getAll());
-
         listViewProductCompare.setAdapter(productCompareDataAdapter);
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            String nameproducts = extras.getString("nameproduct");
+            Double pricecompares = extras.getDouble("pricecompare");
+            Integer volumecompares = extras.getInt("volumecompare");
+            Integer unitcompares = extras.getInt("unitcompare");
+
+
+            ProductCompare pp = new ProductCompare(nameproducts,pricecompares,volumecompares,unitcompares,null);
+
+            ProductCompareData.add(pp);
+            ListView showinfor = (ListView) findViewById(R.id.listViewProductCompare);
+            ProductCompareDataAdapter pps = new ProductCompareDataAdapter(this, ProductCompareData.getAll());
+            showinfor.setAdapter(pps);
+
+
+
+
+        }
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -55,7 +81,10 @@ public class CompareActivity extends AppCompatActivity
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
+
+
+        drawer.closeDrawer(GravityCompat.START);
+
         } else {
             super.onBackPressed();
         }

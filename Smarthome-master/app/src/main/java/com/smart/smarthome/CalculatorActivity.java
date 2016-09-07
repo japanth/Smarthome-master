@@ -52,23 +52,6 @@ public class CalculatorActivity extends AppCompatActivity
         });
 
 
-        Bundle extras = getIntent().getExtras();
-        if (extras != null) {
-            String nameproducts = extras.getString("nameproduct");
-            Double pricecompares = extras.getDouble("pricecompare");
-            Integer volumecompares = extras.getInt("volumecompare");
-            Integer unitcompares = extras.getInt("unitcompare");
-
-
-            ProductCompare pp = new ProductCompare(nameproducts,pricecompares,volumecompares,unitcompares,null);
-
-            ProductCompareData.add(pp);
-            ListView showinfor = (ListView) findViewById(R.id.listViewProductCompares);
-            ProductCompareDataAdapter productCompareDataAdapter = new ProductCompareDataAdapter(this, ProductCompareData.getAll());
-            showinfor.setAdapter(productCompareDataAdapter);
-
-
-        }
 
 
 
@@ -78,14 +61,9 @@ public class CalculatorActivity extends AppCompatActivity
 
 
 
-        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });*/
+
+
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(

@@ -60,6 +60,10 @@
         <activity
             android:name=".ManualCompareActivity"
             android:label="@string/title_activity_manual_compare"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MonthlyReportActivity"
+            android:label="@string/title_activity_monthly_report"
             android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 

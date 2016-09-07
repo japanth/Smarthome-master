@@ -9,7 +9,7 @@
     tools:openDrawer="start">
 
     <include
-        layout="@layout/app_bar_calculator"
+        layout="@layout/app_bar_monthly_report"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
@@ -19,10 +19,7 @@
         android:layout_height="match_parent"
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
-        app:headerLayout="@layout/nav_header_calculator"
-        app:menu="@menu/activity_calculator_drawer" />
-
-
+        app:headerLayout="@layout/nav_header_monthly_report"
+        app:menu="@menu/activity_monthly_report_drawer" />
 
 </android.support.v4.widget.DrawerLayout>
-

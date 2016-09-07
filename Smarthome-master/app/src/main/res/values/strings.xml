@@ -21,4 +21,8 @@
     <string name="title_activity_setting">SettingActivity</string>
     <string name="title_activity_manual_compare">ManualCompareActivity</string>
 
+    <string name="selected_date">00/00/0000</string>
+    <string name="pick_date">Pick Date</string>
+    <string name="title_activity_monthly_report">MonthlyReportActivity</string>
+
 </resources>

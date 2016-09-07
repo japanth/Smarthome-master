@@ -9,6 +9,7 @@ import android.widget.TextView;
 
 import org.w3c.dom.Text;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -43,7 +44,20 @@ public class ProductCompareDataAdapter extends BaseAdapter {
             view = mInflater.inflate(R.layout.product_compare_data_list, parent, false);
 
         TextView productName = (TextView) view.findViewById(R.id.textViewProductName);
+        TextView productPrice = (TextView) view.findViewById(R.id.textViewProductPrice);
+        TextView productVolume = (TextView) view.findViewById(R.id.textViewProductVolume);
+        TextView productUnit = (TextView) view.findViewById(R.id.textViewProductUnit);
+        TextView productCompare = (TextView) view.findViewById(R.id.textViewProductcompare);
+        Double compare;
+        compare = productCompares.get(position).getPrice()/(productCompares.get(position).getUnit()*productCompares.get(position).getVolume());
+
+        productCompare.setText(String.format( "%.3f", compare ));
+        productUnit.setText(""+productCompares.get(position).getUnit());
+        productVolume.setText(""+productCompares.get(position).getVolume());
+        productPrice.setText(productCompares.get(position).getPrice().toString());
         productName.setText(productCompares.get(position).getName());
         return view;
     }
+
+
 }

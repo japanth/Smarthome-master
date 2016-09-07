@@ -13,63 +13,50 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.EditText;
 
-public class ManualCompareActivity extends AppCompatActivity
+import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.data.BarData;
+import com.github.mikephil.charting.data.BarDataSet;
+import com.github.mikephil.charting.data.BarEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
+
+import java.util.ArrayList;
+
+public class MonthlyReportActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
 
-    Button Cancel;
-    EditText nameProductCompare;
-    EditText pricecomparemanual;
-    EditText volumecomparemanual;
-    EditText unitcomparemanual;
-    Button AddCompare;
-    String nameproduct;
-    Double pricecompare;
-    Integer volumecompare,unitcompare;
+    BarChart chart ;
+    ArrayList<BarEntry> BARENTRY ;
+    ArrayList<String> BarEntryLabels ;
+    BarDataSet Bardataset ;
+    BarData BARDATA ;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_manual_compare);
+        setContentView(R.layout.activity_monthly_report);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        Cancel = (Button)findViewById(R.id.CancelCompare);
-        Cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent bar = new Intent(ManualCompareActivity.this,CalculatorActivity.class);
-                startActivity(bar);
-            }
-        });
+        chart = (BarChart) findViewById(R.id.chart1);
 
-        nameProductCompare = (EditText) findViewById(R.id.nameProductCompare);
-        pricecomparemanual = (EditText) findViewById(R.id.pricecomparemanual);
-        volumecomparemanual = (EditText) findViewById(R.id.volumecomparemanual);
-        unitcomparemanual = (EditText) findViewById(R.id.unitcomparemanual);
-        AddCompare = (Button) findViewById(R.id.AddCompare);
+        BARENTRY = new ArrayList<>();
 
+        BarEntryLabels = new ArrayList<String>();
 
-        AddCompare.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        AddValuesToBARENTRY();
 
-                nameproduct = nameProductCompare.getText().toString();
-                pricecompare = Double.parseDouble(pricecomparemanual.getText().toString());
-                volumecompare = Integer.parseInt(volumecomparemanual.getText().toString());
-                unitcompare = Integer.parseInt(unitcomparemanual.getText().toString());
+        AddValuesToBarEntryLabels();
 
-                Intent i = new Intent(getApplicationContext(), CompareActivity.class);
+        Bardataset = new BarDataSet(BARENTRY, "Projects");
 
-                i.putExtra("nameproduct",nameproduct);
-                i.putExtra("pricecompare",pricecompare);
-                i.putExtra("volumecompare",volumecompare);
-                i.putExtra("unitcompare",unitcompare);
-                startActivity(i);
-            }
-        });
+        BARDATA = new BarData(BarEntryLabels, Bardataset);
+
+        Bardataset.setColors(ColorTemplate.COLORFUL_COLORS);
+
+        chart.setData(BARDATA);
+
+        chart.animateY(3000);
 
 
 
@@ -81,6 +68,41 @@ public class ManualCompareActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    public void AddValuesToBARENTRY(){
+
+        BARENTRY.add(new BarEntry(2f, 0));
+        BARENTRY.add(new BarEntry(4f, 1));
+        BARENTRY.add(new BarEntry(6f, 2));
+        BARENTRY.add(new BarEntry(8f, 3));
+        BARENTRY.add(new BarEntry(7f, 4));
+        BARENTRY.add(new BarEntry(3f, 5));
+        BARENTRY.add(new BarEntry(15f, 6));
+        BARENTRY.add(new BarEntry(20f, 7));
+        BARENTRY.add(new BarEntry(55f, 8));
+        BARENTRY.add(new BarEntry(56f, 9));
+        BARENTRY.add(new BarEntry(13f, 10));
+        BARENTRY.add(new BarEntry(3f, 11));
+
+    }
+
+    public void AddValuesToBarEntryLabels(){
+
+        BarEntryLabels.add("Jan");
+        BarEntryLabels.add("Feb");
+        BarEntryLabels.add("March");
+        BarEntryLabels.add("April");
+        BarEntryLabels.add("May");
+        BarEntryLabels.add("June");
+        BarEntryLabels.add("July");
+        BarEntryLabels.add("Aug");
+        BarEntryLabels.add("Sep");
+        BarEntryLabels.add("Oct");
+        BarEntryLabels.add("Nov");
+        BarEntryLabels.add("Dec");
+
+
     }
 
     @Override
@@ -96,7 +118,7 @@ public class ManualCompareActivity extends AppCompatActivity
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.manual_compare, menu);
+        getMenuInflater().inflate(R.menu.monthly_report, menu);
         return true;
     }
 
@@ -107,10 +129,6 @@ public class ManualCompareActivity extends AppCompatActivity
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-       /* if (id == R.id.action_settings) {
-            return true;
-        }*/
 
         return super.onOptionsItemSelected(item);
     }
@@ -123,22 +141,22 @@ public class ManualCompareActivity extends AppCompatActivity
 
         if (id == R.id.nav_inventory) {
             // Handle the camera action
-            Intent bar = new Intent(ManualCompareActivity.this,InventoryActivity.class);
+            Intent bar = new Intent(MonthlyReportActivity.this,InventoryActivity.class);
             startActivity(bar);
         } else if (id == R.id.nav_shoppinglist) {
-            Intent bar = new Intent(ManualCompareActivity.this,ShoppinglistActivity.class);
+            Intent bar = new Intent(MonthlyReportActivity.this,ShoppinglistActivity.class);
             startActivity(bar);
         } else if (id == R.id.nav_calculator) {
-            Intent bar = new Intent(ManualCompareActivity.this,CalculatorActivity.class);
+            Intent bar = new Intent(MonthlyReportActivity.this,CalculatorActivity.class);
             startActivity(bar);
         } else if (id == R.id.nav_locationbase) {
-            Intent bar = new Intent(ManualCompareActivity.this,LocationbaseActivity.class);
+            Intent bar = new Intent(MonthlyReportActivity.this,LocationbaseActivity.class);
             startActivity(bar);
         } else if (id == R.id.nav_summary) {
-            Intent bar = new Intent(ManualCompareActivity.this,SummaryreportActivity.class);
+            Intent bar = new Intent(MonthlyReportActivity.this,SummaryreportActivity.class);
             startActivity(bar);
         } else if (id == R.id.nav_setting) {
-            Intent bar = new Intent(ManualCompareActivity.this,SettingActivity.class);
+            Intent bar = new Intent(MonthlyReportActivity.this,SettingActivity.class);
             startActivity(bar);
         }
 
